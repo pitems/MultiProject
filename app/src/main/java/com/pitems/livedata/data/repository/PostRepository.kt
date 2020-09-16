@@ -25,4 +25,12 @@ class PostRepository {
     suspend fun getCustomPostQueryMap(userId:Int,options:Map<String,String>):Response<List<Post>>{
         return RetrofitInstance.api.getCustomPostQueryMap(userId,options)
     }
+
+    suspend fun pushPost(post:Post):Response<Post>{
+        return RetrofitInstance.api.pushPost(post)
+    }
+
+    suspend fun pushPostEncoded(userId:Int,id:Int,title:String,body:String):Response<Post>{
+        return RetrofitInstance.api.pushPostEncoded(userId,id,title,body)
+    }
 }

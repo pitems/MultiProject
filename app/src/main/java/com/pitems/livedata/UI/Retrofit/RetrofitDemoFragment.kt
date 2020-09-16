@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pitems.livedata.R
 import com.pitems.livedata.UI.adapters.MyAdapter
+import com.pitems.livedata.data.model.Post
 import com.pitems.livedata.data.repository.PostRepository
 import com.pitems.livedata.data.viewmodel.DemoRoom.RetrofitDemoViewModel
 import com.pitems.livedata.data.viewmodel.DemoRoom.RetrofitDemoViewModelFactory
@@ -42,6 +43,15 @@ class RetrofitDemoFragment : Fragment() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(RetrofitDemoViewModel::class.java)
 
         viewModel.getCustomPostQuery(2,"id","desc")
+        val myPost=Post(1,1,"Le Title","Le body")
+        viewModel.pushPostEncoded(1,1,"Le Title","Le body")
+        viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response.isSuccessful) {
+                Log.d("POST RESPONSE", response.body().toString())
+                Log.d("CODE", response.code().toString())
+                Log.d("MESSAGE", response.message())
+            }
+        })
         viewModel.myResponseCustom.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setData(it) }
