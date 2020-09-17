@@ -60,5 +60,11 @@ interface SimpleApi {
     suspend fun PostExampleHeaders(
         @Body post:Post
     ):Response<Post>
+
+    //Dynamically adding Headers to an API Call
+    @POST("posts")
+    suspend fun PostExampleHeadersDynamic(
+        @Header("Auth") auth:String
+    ):Response<Post>
     //This above is just an example and not called anywhere in my code
 }
