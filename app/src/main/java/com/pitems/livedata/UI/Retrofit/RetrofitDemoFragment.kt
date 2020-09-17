@@ -50,6 +50,8 @@ class RetrofitDemoFragment : Fragment() {
                 Log.d("POST RESPONSE", response.body().toString())
                 Log.d("CODE", response.code().toString())
                 Log.d("MESSAGE", response.message())
+                Log.d("HEADERS", response.headers().toString())
+                Toast.makeText(context, "Post Sent", Toast.LENGTH_SHORT).show()
             }
         })
         viewModel.myResponseCustom.observe(viewLifecycleOwner, Observer { response ->

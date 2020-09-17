@@ -50,4 +50,15 @@ interface SimpleApi {
         @Field("title") title:String,
         @Field("body") body:String,
     ):Response<Post>
+
+    //The Headers added to our interceptor are also called along this new Headers added to this specific call
+    @Headers(
+        "Authorization: 123123123",
+        "Platform: Android"
+    )
+    @POST("posts")
+    suspend fun PostExampleHeaders(
+        @Body post:Post
+    ):Response<Post>
+    //This above is just an example and not called anywhere in my code
 }
